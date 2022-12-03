@@ -1,0 +1,17 @@
+```{r}
+data <- read.csv('worldometer_coronavirus_daily_data.csv')
+data = data[data$country %in% c('United States', 'Spain', 'Brazil', 'Germany', 'Nepal', 'Australia'),]
+
+data$date <- as.Date(data$date, "%Y-%m-%d")
+head(data)
+```
+```{r}
+library(ggplot2)
+library(ggridges)
+
+height  = data$cumulative_total_cases/sum(data$cumulative_total_cases)
+
+
+ggplot(data, aes(x = date, y =country, height = scales::rescale(height))) +
+  geom_ridgeline()
+```

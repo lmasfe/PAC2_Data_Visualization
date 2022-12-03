@@ -1,0 +1,40 @@
+```{r}
+data_sun <- read.csv('owid-covid-data.csv')
+```
+
+```{r}
+data <- data_sun[(data_sun$date == '2020-12-01'),]
+data <- data.frame(country = data$location, continent = data$continent, new_cases = data$new_cases)
+```
+
+```{r}
+library(plotly)
+
+fig <- plot_ly(
+  labels = data$country,
+  parents = data$continent,
+  values = data$new_cases,
+  type = 'sunburst'
+)
+
+
+fig
+```
+
+```{r}
+data <- data[(data$continent == 'Asia'),]
+```
+
+```{r}
+library(plotly)
+
+fig <- plot_ly(
+  labels = data$country,
+  parents = data$continent,
+  values = data$new_cases,
+  type = 'sunburst'
+)
+
+
+fig
+```
